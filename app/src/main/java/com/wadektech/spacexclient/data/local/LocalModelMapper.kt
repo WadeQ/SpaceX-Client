@@ -14,14 +14,14 @@ class LocalModelMapper
 @Inject constructor() : IEntityMapper<SpaceXLocalItem , SpaceXDomainItem>{
     override fun mapFromEntity(entity: SpaceXLocalItem): SpaceXDomainItem {
         return SpaceXDomainItem(
-            id = entity.flightNumber,
-            launchDateLocal = entity.launchDateLocal,
-            launchDateUtc = entity.launchDateUtc,
-            launchSuccess = entity.launchSuccess,
-            launchYear = entity.launchYear,
-            links = entity.linksLocal as Links,
-            missionName = entity.missionName,
-            rocket = entity.rocket as Rocket
+            id = entity.flightNumber!!,
+            launchDateLocal = entity.launchDateLocal!!,
+            launchDateUtc = entity.launchDateUtc!!,
+            launchSuccess = entity.launchSuccess!!,
+            launchYear = entity.launchYear!!,
+            links = entity?.linksLocal as Links,
+            missionName = entity.missionName!!,
+            rocket = entity?.rocket as Rocket
         )
     }
 

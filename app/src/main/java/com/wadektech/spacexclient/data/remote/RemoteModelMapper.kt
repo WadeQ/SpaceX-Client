@@ -1,8 +1,6 @@
 package com.wadektech.spacexclient.data.remote
 
-import com.wadektech.spacexclient.data.local.models.RocketLocal
-import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
-import com.wadektech.spacexclient.data.local.models.LinksLocal
+
 import com.wadektech.spacexclient.data.remote.models.SpaceXRemoteItem
 import com.wadektech.spacexclient.domain.Links
 import com.wadektech.spacexclient.domain.Rocket
@@ -34,9 +32,9 @@ class RemoteModelMapper
            launchDateUtc = domain.launchDateUtc,
            launchSuccess = domain.launchSuccess,
            launchYear = domain.launchYear,
-           linksLocal = domain.links as LinksLocal,
+           linksLocal = domain.links as com.wadektech.spacexclient.data.remote.models.Links,
            missionName = domain.missionName,
-           rocketLocal = domain.rocket as RocketLocal
+           rocketLocal = domain.rocket as com.wadektech.spacexclient.data.remote.models.Rocket
        )
     }
 

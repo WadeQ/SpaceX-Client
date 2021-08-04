@@ -20,9 +20,9 @@ data class SpaceXRemoteItem(
     @Json(name = "launch_year")
     val launchYear: String = "",
     @Json(name = "links")
-    val linksLocal: LinksLocal = LinksLocal(),
+    val linksLocal: Links = Links(),
     @Json(name = "mission_name")
     val missionName: String = "",
     @Json(name = "rocket")
-    val rocketLocal: RocketLocal = RocketLocal()
+    val rocketLocal: Rocket = Rocket()
 )

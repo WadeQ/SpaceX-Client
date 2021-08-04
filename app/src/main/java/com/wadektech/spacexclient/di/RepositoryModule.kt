@@ -1,7 +1,9 @@
 package com.wadektech.spacexclient.di
 
+import com.wadektech.spacexclient.data.local.LocalModelMapper
 import com.wadektech.spacexclient.data.local.SpaceXDao
-import com.wadektech.spacexclient.data.local.SpaceXRoomDatabase
+import com.wadektech.spacexclient.data.remote.RemoteModelMapper
+import com.wadektech.spacexclient.data.remote.SpaceXApiService
 import com.wadektech.spacexclient.data.repository.SpaceXLaunchesRepository
 import dagger.Module
 import dagger.Provides
@@ -20,11 +22,15 @@ object RepositoryModule {
     @Provides
     fun providePostsRepository(
         spaceXDao: SpaceXDao,
-        spaceXRoomDatabase: SpaceXRoomDatabase
+        spaceXApiService: SpaceXApiService,
+        localModelMapper: LocalModelMapper,
+        remoteModelMapper: RemoteModelMapper
     ): SpaceXLaunchesRepository {
         return SpaceXLaunchesRepository(
             spaceXDao,
-            spaceXRoomDatabase
+            spaceXApiService,
+            localModelMapper,
+            remoteModelMapper
         )
     }
 }
