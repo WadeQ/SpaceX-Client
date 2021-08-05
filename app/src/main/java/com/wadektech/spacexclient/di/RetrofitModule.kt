@@ -38,13 +38,9 @@ object RetrofitModule {
                 val loggingInterceptor = HttpLoggingInterceptor()
                 loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
                 client.addInterceptor(loggingInterceptor)
-            }
-            .addInterceptor { chain ->
-                chain.proceed(chain.request().newBuilder().also {
-                }.build())
-            }
-            .build()
+            }.build()
     }
+
 
     @Singleton
     @Provides

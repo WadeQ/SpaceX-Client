@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.wadektech.spacexclient.presentation.viewmodels.SpaceXLaunchesViewModel" />
+            name="info"
+            type="com.wadektech.spacexclient.data.local.models.CompanyInfo" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -50,12 +50,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/btn_filter_warehouse"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_filter_launches"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:actionViewClass="androidx.appcompat.widget.SearchView"
-                    app:searchIcon="@drawable/ic_filter"
+                    android:background="@drawable/ic_filter"
                     app:showAsAction="always|collapseActionView"
                     tools:ignore="ContentDescription" />
 
@@ -85,13 +85,11 @@
                     android:textSize="20sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_company_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proximanovaregular"
-                    android:text="{companyName} was founded by {founderName} in
-{year}. It has now {employees} employees,
-{launch_sites} launch sites, and is valued at USD
-{valuation}"
+                    android:text="@string/company_info"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -115,6 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,11 +143,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/topbar2">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_warehouse"
+                    android:id="@+id/rv_launches"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:padding="8dp"
+                    tools:itemCount="10"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/launches_list_items">
 
                 </androidx.recyclerview.widget.RecyclerView>

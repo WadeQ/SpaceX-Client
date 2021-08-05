@@ -31,11 +31,19 @@ class SpaceXLaunchesViewModel
 
     val fetchAllLaunches = getAllLaunchesByFilterAndSortOrder.asLiveData()
 
+    val companyInfo = spaceXLaunchesRepository.companyInfo().asLiveData()
+
+
     init {
         getAllSpaceXLaunches()
+        getAllCompanyInfo()
     }
 
     private fun getAllSpaceXLaunches() = viewModelScope.launch {
         spaceXLaunchesRepository.getAllSpaceLaunchesFromRemote()
+    }
+
+    private fun getAllCompanyInfo() = viewModelScope.launch {
+        spaceXLaunchesRepository.getCompanyInfoFromRemote()
     }
 }

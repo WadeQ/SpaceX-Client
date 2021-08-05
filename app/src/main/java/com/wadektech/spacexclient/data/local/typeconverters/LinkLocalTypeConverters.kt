@@ -10,7 +10,6 @@ class LinkLocalTypeConverters {
     @TypeConverter
     fun fromLink(links: LinksLocal): String {
         return JSONObject().apply {
-            put("id", links.id)
             put("article_link", links.articleLink)
             put("mission_patch", links.missionPatch)
             put("mission_patch_small", links.missionPatchSmall)
@@ -23,7 +22,6 @@ class LinkLocalTypeConverters {
     fun toLink(links: String): LinksLocal {
         val json = JSONObject(links)
         return LinksLocal(
-            json.optInt("id"),
             json.optString("article_link"),
             json.optString("mission_patch"),
             json.optString("mission_patch_small"),

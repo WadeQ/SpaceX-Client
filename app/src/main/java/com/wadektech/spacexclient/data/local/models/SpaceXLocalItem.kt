@@ -44,8 +44,6 @@ data class RocketLocal(
 
 @DefaultIfNull
 data class LinksLocal(
-    @PrimaryKey(autoGenerate = true)
-    val id : Int,
     @Json(name = "article_link")
     val articleLink: String?,
     @Json(name = "mission_patch")

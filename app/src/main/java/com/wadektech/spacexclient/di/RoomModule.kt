@@ -2,6 +2,7 @@ package com.wadektech.spacexclient.di
 
 import android.content.Context
 import androidx.room.Room
+import com.wadektech.spacexclient.data.local.ICompanyDao
 import com.wadektech.spacexclient.data.local.SpaceXDao
 import com.wadektech.spacexclient.data.local.SpaceXRoomDatabase
 import dagger.Module
@@ -32,6 +33,12 @@ object RoomModule {
     @Provides
     fun provideBorderDao(spaceXRoomDatabase: SpaceXRoomDatabase): SpaceXDao {
         return spaceXRoomDatabase.spaceXDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCompanyDao(spaceXRoomDatabase: SpaceXRoomDatabase): ICompanyDao {
+        return spaceXRoomDatabase.companyInfoDao()
     }
 
 

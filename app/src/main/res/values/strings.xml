@@ -2,4 +2,5 @@
     <string name="app_name">SpaceX Client</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="company_info">{companyName} was founded by {founderName} in {year}. It has now {employees} employees, {launch_sites} launch sites, and is valued at USD {valuation}</string>
 </resources>
