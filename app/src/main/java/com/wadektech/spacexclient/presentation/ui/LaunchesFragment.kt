@@ -1,13 +1,19 @@
 package com.wadektech.spacexclient.presentation.ui
 
+import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.wadektech.spacexclient.R
 import com.wadektech.spacexclient.databinding.FragmentLaunchesBinding
 import com.wadektech.spacexclient.presentation.adapters.SpaceXAdapter
 import com.wadektech.spacexclient.presentation.viewmodels.SpaceXLaunchesViewModel
@@ -16,11 +22,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class LaunchesFragment : Fragment() {
+class LaunchesFragment : Fragment(){
     private lateinit var spaceXAdapter: SpaceXAdapter
 
     private val spaceXLaunchesViewModel : SpaceXLaunchesViewModel by viewModels()
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,8 +64,20 @@ class LaunchesFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initFilterDialog() {
-        TODO("Not yet implemented")
+        val filterDialog : androidx.appcompat.app.AlertDialog? = MaterialAlertDialogBuilder(requireContext(), R.style.FilterDialog)
+            .setView(R.layout.filter_dialog)
+            .show()
+        filterDialog?.findViewById<View>(R.id.searchView)?.setOnClickListener {
+            Toast.makeText(requireContext(), "Picked text is $it", Toast.LENGTH_SHORT).show()
+        }
+        filterDialog?.findViewById<View>(R.id.btn_sort)?.setOnClickListener {
+
+        }
+        filterDialog?.findViewById<View>(R.id.btn_apply)?.setOnClickListener {
+            filterDialog.cancel()
+        }
     }
 
 }

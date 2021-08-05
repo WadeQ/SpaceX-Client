@@ -1,10 +1,8 @@
 package com.wadektech.spacexclient.presentation.adapters
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,11 +10,11 @@ import com.bumptech.glide.Glide
 import com.wadektech.spacexclient.R
 import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
 import com.wadektech.spacexclient.databinding.LaunchesListItemsBinding
-import com.wadektech.spacexclient.domain.SpaceXDomainItem
-import java.time.LocalDateTime
 
 
-class SpaceXAdapter(var context: Context) :
+class SpaceXAdapter(var context: Context
+//                    private var singleLaunchItemClicked: OnSingleLaunchItemClicked
+                    ) :
         ListAdapter<SpaceXLocalItem, SpaceXAdapter.ViewHolder>(LaunchesDiffUtil()) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +24,10 @@ class SpaceXAdapter(var context: Context) :
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val launches = getItem(position)
             if (launches != null){
-                holder.bind(launches)
+                holder.bind(
+                    launches
+//                    singleLaunchItemClicked
+                )
             }
 
             when(launches.launchSuccess){
@@ -42,15 +43,17 @@ class SpaceXAdapter(var context: Context) :
         class ViewHolder private constructor(val binding: LaunchesListItemsBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(launches: SpaceXLocalItem){
+            fun bind(launches: SpaceXLocalItem
+//                     singleLaunchItemClicked: OnSingleLaunchItemClicked
+            ){
                 binding.apply {
                     tvMissionName.text = launches.missionName
-                    tvLaunchDate.text = launches.launchDateLocal +" at " + launches.launchDateLocal
+                    tvLaunchDate.text = launches.launchDateLocal
                     tvRocketName.text = launches.rocket?.rocketName + "/"+ launches.rocket?.rocketType
                     tvDaysSince.text = launches.launchYear
                 }
                 itemView.setOnClickListener {
-//                    singleCardItemClicked.onSingleCardItemClicked(launches)
+//                    singleLaunchItemClicked.onSingleEntryItemClicked(adapterPosition)
                 }
             }
 
@@ -63,9 +66,9 @@ class SpaceXAdapter(var context: Context) :
             }
         }
 
-//        class OnSingleCardItemClicked(val cardItemClicked: (launches : SpaceXDomainItem)-> Unit) {
-//            fun onSingleCardItemClicked(launches: SpaceXDomainItem) = cardItemClicked(launches)
-//        }
+    interface OnSingleLaunchItemClicked {
+        fun onSingleEntryItemClicked(position: Int)
+    }
 
         class LaunchesDiffUtil : DiffUtil.ItemCallback<SpaceXLocalItem>(){
             override fun areItemsTheSame(oldItem: SpaceXLocalItem, newItem: SpaceXLocalItem): Boolean {

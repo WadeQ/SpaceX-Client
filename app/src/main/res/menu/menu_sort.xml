@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Sort by Desc to Asc"
+        android:id="@+id/sort_by_desc"/>
+
+    <item android:title="Sort by Asc to Desc"
+        android:id="@+id/sort_by_asc"/>
+</menu>
