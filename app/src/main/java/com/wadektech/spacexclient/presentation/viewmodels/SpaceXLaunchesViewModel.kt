@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.wadektech.spacexclient.data.repository.SpaceXLaunchesRepository
+import com.wadektech.spacexclient.data.repository.SpaceXLaunchesRepositoryImpl
 import com.wadektech.spacexclient.utils.SortOrder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class SpaceXLaunchesViewModel
 @ViewModelInject constructor(
-    private val spaceXLaunchesRepository: SpaceXLaunchesRepository
+    private val spaceXLaunchesRepository: SpaceXLaunchesRepositoryImpl
 ) : ViewModel(){
 
     val filter = MutableStateFlow("")
@@ -32,7 +32,6 @@ class SpaceXLaunchesViewModel
     val fetchAllLaunches = getAllLaunchesByFilterAndSortOrder.asLiveData()
 
     val companyInfo = spaceXLaunchesRepository.companyInfo().asLiveData()
-
 
     init {
         getAllSpaceXLaunches()

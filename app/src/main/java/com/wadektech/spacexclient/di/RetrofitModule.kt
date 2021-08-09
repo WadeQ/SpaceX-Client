@@ -3,7 +3,7 @@ package com.wadektech.spacexclient.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.wadektech.spacexclient.data.remote.SpaceXApiService
+import com.wadektech.spacexclient.data.remote.retrofit.SpaceXApiService
 import com.wadektech.spacexclient.utils.Constants
 import dagger.Module
 import dagger.Provides

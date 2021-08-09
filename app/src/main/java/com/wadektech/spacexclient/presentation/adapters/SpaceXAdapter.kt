@@ -49,7 +49,8 @@ class SpaceXAdapter(var context: Context
                 binding.apply {
                     tvMissionName.text = launches.missionName
                     tvLaunchDate.text = launches.launchDateLocal
-                    tvRocketName.text = launches.rocket?.rocketName + "/"+ launches.rocket?.rocketType
+                    tvRocketName.text = launches
+                        .rocket?.rocketName + "/"+ launches.rocket?.rocketType
                     tvDaysSince.text = launches.launchYear
                 }
                 itemView.setOnClickListener {
@@ -60,7 +61,8 @@ class SpaceXAdapter(var context: Context
             companion object {
                 fun from(parent: ViewGroup): ViewHolder {
                     val layoutInflater = LayoutInflater.from(parent.context)
-                    val binding = LaunchesListItemsBinding.inflate(layoutInflater, parent, false)
+                    val binding = LaunchesListItemsBinding
+                        .inflate(layoutInflater, parent, false)
                     return ViewHolder(binding)
                 }
             }

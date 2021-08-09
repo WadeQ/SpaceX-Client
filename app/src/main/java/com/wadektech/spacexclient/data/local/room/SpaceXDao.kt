@@ -1,4 +1,4 @@
-package com.wadektech.spacexclient.data.local
+package com.wadektech.spacexclient.data.local.room
 
 import androidx.room.Dao
 import androidx.room.Insert

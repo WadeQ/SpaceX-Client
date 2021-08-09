@@ -1,7 +1,6 @@
-package com.wadektech.spacexclient.data.remote
+package com.wadektech.spacexclient.data.remote.models
 
 
-import com.wadektech.spacexclient.data.remote.models.SpaceXRemoteItem
 import com.wadektech.spacexclient.domain.Links
 import com.wadektech.spacexclient.domain.Rocket
 import com.wadektech.spacexclient.domain.SpaceXDomainItem

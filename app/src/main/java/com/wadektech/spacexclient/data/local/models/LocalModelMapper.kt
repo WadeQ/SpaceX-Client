@@ -1,8 +1,5 @@
-package com.wadektech.spacexclient.data.local
+package com.wadektech.spacexclient.data.local.models
 
-import com.wadektech.spacexclient.data.local.models.LinksLocal
-import com.wadektech.spacexclient.data.local.models.RocketLocal
-import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
 import com.wadektech.spacexclient.domain.Links
 import com.wadektech.spacexclient.domain.Rocket
 import com.wadektech.spacexclient.domain.SpaceXDomainItem
@@ -19,9 +16,9 @@ class LocalModelMapper
             launchDateUtc = entity.launchDateUtc!!,
             launchSuccess = entity.launchSuccess!!,
             launchYear = entity.launchYear!!,
-            links = entity?.linksLocal as Links,
+            links = entity.linksLocal as Links,
             missionName = entity.missionName!!,
-            rocket = entity?.rocket as Rocket
+            rocket = entity.rocket as Rocket
         )
     }
 

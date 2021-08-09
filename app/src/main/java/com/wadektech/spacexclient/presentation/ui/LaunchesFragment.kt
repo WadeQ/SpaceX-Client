@@ -19,6 +19,7 @@ import com.wadektech.spacexclient.presentation.adapters.SpaceXAdapter
 import com.wadektech.spacexclient.presentation.viewmodels.SpaceXLaunchesViewModel
 import com.wadektech.spacexclient.utils.showProgressBar
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -52,13 +53,23 @@ class LaunchesFragment : Fragment(){
 
         binding.progressBar.showProgressBar(true)
         spaceXLaunchesViewModel.fetchAllLaunches.observe(viewLifecycleOwner, Observer {
-            spaceXAdapter.submitList(it)
-            binding.progressBar.showProgressBar(false)
+            if (it.isNotEmpty()){
+                binding.progressBar.showProgressBar(false)
+                spaceXAdapter.submitList(it)
+            } else {
+                Timber.d("Error getting data from launches API")
+            }
         })
 
         spaceXLaunchesViewModel.companyInfo.observe(viewLifecycleOwner, Observer {
-            binding.apply {
-                tvCompanyInfo.text = "${it.name} was founded by ${it.founder} in ${it.founded}. It has now ${it.employees} employees,${it.launchSites} launch sites, and is valued at USD${it.valuation}"
+            if (it != null){
+                binding.apply {
+                    tvCompanyInfo.text = "${it?.name} was founded by ${it?.founder} in ${it?.founded}. " +
+                            "It has now ${it?.employees} employees,${it?.launchSites} launch sites, " +
+                            "and is valued at USD${it?.valuation}"
+                }
+            } else {
+                Timber.d("Error getting data from company API")
             }
         })
         return binding.root
@@ -66,11 +77,13 @@ class LaunchesFragment : Fragment(){
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initFilterDialog() {
-        val filterDialog : androidx.appcompat.app.AlertDialog? = MaterialAlertDialogBuilder(requireContext(), R.style.FilterDialog)
+        val filterDialog : androidx.appcompat.app.AlertDialog? = MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.FilterDialog)
             .setView(R.layout.filter_dialog)
             .show()
         filterDialog?.findViewById<View>(R.id.searchView)?.setOnClickListener {
-            Toast.makeText(requireContext(), "Picked text is $it", Toast.LENGTH_SHORT).show()
+
         }
         filterDialog?.findViewById<View>(R.id.btn_sort)?.setOnClickListener {
 

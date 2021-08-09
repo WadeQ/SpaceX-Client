@@ -1,4 +1,4 @@
-package com.wadektech.spacexclient.data.local
+package com.wadektech.spacexclient.data.local.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
