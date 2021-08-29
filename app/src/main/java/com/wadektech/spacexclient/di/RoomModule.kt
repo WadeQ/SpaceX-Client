@@ -23,9 +23,7 @@ object RoomModule {
         return Room.databaseBuilder(
             context,
             SpaceXRoomDatabase::class.java,
-            SpaceXRoomDatabase.DB_NAME)
-            .fallbackToDestructiveMigration()
-            .build()
+            SpaceXRoomDatabase.DB_NAME).fallbackToDestructiveMigration().build()
     }
 
     @Singleton

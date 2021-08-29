@@ -1,14 +1,14 @@
 package com.wadektech.spacexclient.data.local.typeconverters
 
 import androidx.room.TypeConverter
-import com.wadektech.spacexclient.data.local.models.LinksLocal
+import com.wadektech.spacexclient.data.local.models.Links
 import org.json.JSONObject
 
 
 class LinkLocalTypeConverters {
 
     @TypeConverter
-    fun fromLink(links: LinksLocal): String {
+    fun fromLink(links: Links): String {
         return JSONObject().apply {
             put("article_link", links.articleLink)
             put("mission_patch", links.missionPatch)
@@ -19,9 +19,9 @@ class LinkLocalTypeConverters {
     }
 
     @TypeConverter
-    fun toLink(links: String): LinksLocal {
+    fun toLink(links: String): Links {
         val json = JSONObject(links)
-        return LinksLocal(
+        return Links(
             json.optString("article_link"),
             json.optString("mission_patch"),
             json.optString("mission_patch_small"),

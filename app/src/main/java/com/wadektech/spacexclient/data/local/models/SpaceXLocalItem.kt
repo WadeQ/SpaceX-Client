@@ -22,16 +22,16 @@ data class SpaceXLocalItem(
     @Json(name = "launch_year")
     val launchYear: String?,
     @Json(name = "links")
-    val linksLocal: LinksLocal?,
+    val linksLocal: Links,
     @Json(name = "mission_name")
     val missionName: String?,
     @Json(name = "rocket")
-    val rocket: RocketLocal?
+    val rocket: Rocket
 )
 
 
 @DefaultIfNull
-data class RocketLocal(
+data class Rocket(
     @PrimaryKey(autoGenerate = false)
     @Json(name = "rocket_id")
     val rocketId: String?,
@@ -43,7 +43,7 @@ data class RocketLocal(
 
 
 @DefaultIfNull
-data class LinksLocal(
+data class Links(
     @Json(name = "article_link")
     val articleLink: String?,
     @Json(name = "mission_patch")

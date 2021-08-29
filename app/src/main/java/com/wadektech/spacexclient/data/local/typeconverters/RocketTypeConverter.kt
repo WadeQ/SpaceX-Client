@@ -1,13 +1,13 @@
 package com.wadektech.spacexclient.data.local.typeconverters
 
 import androidx.room.TypeConverter
-import com.wadektech.spacexclient.data.local.models.RocketLocal
+import com.wadektech.spacexclient.data.local.models.Rocket
 import org.json.JSONObject
 
 class RocketTypeConverter {
 
     @TypeConverter
-    fun fromRocket(rocket: RocketLocal): String {
+    fun fromRocket(rocket: Rocket): String {
         return JSONObject().apply {
             put("id", rocket.rocketId)
             put("rocket_name", rocket.rocketName)
@@ -16,9 +16,9 @@ class RocketTypeConverter {
     }
 
     @TypeConverter
-    fun toRocket(rocket: String):RocketLocal{
+    fun toRocket(rocket: String):Rocket{
         val json = JSONObject(rocket)
-        return RocketLocal(
+        return Rocket(
             json.optString("id"),
             json.optString("rocket_name"),
             json.optString("rocket_type")

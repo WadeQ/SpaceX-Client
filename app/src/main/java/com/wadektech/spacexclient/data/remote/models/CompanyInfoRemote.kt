@@ -1,14 +1,9 @@
-package com.wadektech.spacexclient.data.local.models
+package com.wadektech.spacexclient.data.remote.models
 
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
-@Entity(tableName = "company_info")
-@JsonClass(generateAdapter = true)
-data class CompanyInfo(
+
+data class CompanyInfoRemote(
     @Json(name = "employees")
     val employees: Int?,
     @Json(name = "founded")
@@ -21,7 +16,4 @@ data class CompanyInfo(
     val name: String?,
     @Json(name = "valuation")
     val valuation: Long?
-){
-    @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
-}
+)

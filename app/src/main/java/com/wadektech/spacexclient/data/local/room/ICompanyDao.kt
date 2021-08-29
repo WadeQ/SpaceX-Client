@@ -14,7 +14,6 @@ interface ICompanyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCompanyInfo(info : CompanyInfo)
 
-
     @Query("SELECT * FROM company_info")
     fun getCompanyInfo() : Flow<CompanyInfo>
 }

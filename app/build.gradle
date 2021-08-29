@@ -81,7 +81,7 @@ dependencies {
 
 
     //Material design
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.4.0'
 
 
     def hilt_version = "2.28-alpha"

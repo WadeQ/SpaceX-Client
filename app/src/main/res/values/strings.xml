@@ -3,4 +3,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="company_info">{companyName} was founded by {founderName} in {year}. It has now {employees} employees, {launch_sites} launch sites, and is valued at USD {valuation}</string>
+    <string name="filter_by">Filter by:</string>
+    <string name="launch_year">Launch year</string>
+    <string name="descending">Descending</string>
+    <string name="ascending">Ascending</string>
+    <string name="launch_success">Launch success</string>
+    <string name="hide">Hide</string>
+    <string name="sort_by">Sort By:</string>
 </resources>

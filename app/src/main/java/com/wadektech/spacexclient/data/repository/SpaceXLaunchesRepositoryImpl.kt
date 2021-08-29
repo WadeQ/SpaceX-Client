@@ -1,11 +1,12 @@
 package com.wadektech.spacexclient.data.repository
 
+import android.annotation.SuppressLint
 import com.wadektech.spacexclient.data.local.room.ICompanyDao
-import com.wadektech.spacexclient.data.local.models.LocalModelMapper
 import com.wadektech.spacexclient.data.local.room.SpaceXDao
 import com.wadektech.spacexclient.data.local.models.CompanyInfo
+import com.wadektech.spacexclient.data.local.models.CompanyInfoLocalMapper
 import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
-import com.wadektech.spacexclient.data.remote.models.RemoteModelMapper
+import com.wadektech.spacexclient.data.remote.models.CompanyInfoRemoteMapper
 import com.wadektech.spacexclient.data.remote.retrofit.SpaceXApiService
 import com.wadektech.spacexclient.domain.ISpaceRepository
 import com.wadektech.spacexclient.utils.SortOrder
@@ -20,17 +21,16 @@ class SpaceXLaunchesRepositoryImpl @Inject constructor(
     private val spaceXDao: SpaceXDao,
     private val spaceXApiService: SpaceXApiService,
     private val companyInfoDao: ICompanyDao,
-    private val localModelMapper: LocalModelMapper,
-    private val remoteModelMapper: RemoteModelMapper
+    private val companyInfoRemoteMapper: CompanyInfoRemoteMapper,
+    private val companyInfoLocalMapper: CompanyInfoLocalMapper
 ) : ISpaceRepository {
 
+    @SuppressLint("BinaryOperationInTimber")
     override suspend fun getAllSpaceLaunchesFromRemote()  {
         return withContext(Dispatchers.IO) {
             try {
                 val launches = spaceXApiService.getAllLaunchesFromRemoteAsync().await()
-                val launchesList = remoteModelMapper.mapFromEntityAsList(launches)
-                val cachedLaunches = localModelMapper.mapToEntityAsList(launchesList)
-                spaceXDao.saveAllSpaceXLaunches(cachedLaunches)
+                spaceXDao.saveAllSpaceXLaunches(launches)
                 Timber.d("getAllSpaceLaunchesFromRemote:  Success, retrieved launches " +
                         "are ${launches.size}")
             } catch (e : Exception){
@@ -39,11 +39,14 @@ class SpaceXLaunchesRepositoryImpl @Inject constructor(
         }
     }
 
+    @SuppressLint("BinaryOperationInTimber")
     override suspend fun getCompanyInfoFromRemote()  {
         return withContext(Dispatchers.IO) {
             try {
                 val info = spaceXApiService.getCompanyInfoAsync().await()
-                companyInfoDao.saveCompanyInfo(info)
+                val infoRemote = companyInfoRemoteMapper.mapFromEntity(info)
+                val cacheInfo = companyInfoLocalMapper.mapToEntity(infoRemote)
+                companyInfoDao.saveCompanyInfo(cacheInfo)
                 Timber.d("getCompanyInfoFromRemote:  Success, retrieved info name " +
                         "is ${info.name}")
             } catch (e : Exception){

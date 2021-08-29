@@ -1,9 +1,9 @@
 package com.wadektech.spacexclient.di
 
+import com.wadektech.spacexclient.data.local.models.CompanyInfoLocalMapper
 import com.wadektech.spacexclient.data.local.room.ICompanyDao
-import com.wadektech.spacexclient.data.local.models.LocalModelMapper
 import com.wadektech.spacexclient.data.local.room.SpaceXDao
-import com.wadektech.spacexclient.data.remote.models.RemoteModelMapper
+import com.wadektech.spacexclient.data.remote.models.CompanyInfoRemoteMapper
 import com.wadektech.spacexclient.data.remote.retrofit.SpaceXApiService
 import com.wadektech.spacexclient.data.repository.SpaceXLaunchesRepositoryImpl
 import dagger.Module
@@ -25,15 +25,15 @@ object RepositoryModule {
         spaceXDao: SpaceXDao,
         spaceXApiService: SpaceXApiService,
         companyInfoDao: ICompanyDao,
-        localModelMapper: LocalModelMapper,
-        remoteModelMapper: RemoteModelMapper
+        companyInfoRemoteMapper: CompanyInfoRemoteMapper,
+        companyInfoLocalMapper: CompanyInfoLocalMapper
     ): SpaceXLaunchesRepositoryImpl {
         return SpaceXLaunchesRepositoryImpl(
             spaceXDao,
             spaceXApiService,
             companyInfoDao,
-            localModelMapper,
-            remoteModelMapper
+            companyInfoRemoteMapper,
+            companyInfoLocalMapper
         )
     }
 }

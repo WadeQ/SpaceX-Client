@@ -7,16 +7,14 @@ import com.wadektech.spacexclient.data.local.models.CompanyInfo
 import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
 import com.wadektech.spacexclient.data.local.typeconverters.LinkLocalTypeConverters
 import com.wadektech.spacexclient.data.local.typeconverters.RocketTypeConverter
-import com.wadektech.spacexclient.data.local.typeconverters.SpaceXLaunchesTypeConverters
 
 
-@Database(entities = [SpaceXLocalItem::class, CompanyInfo::class], version = 8, exportSchema = false)
+@Database(entities = [SpaceXLocalItem::class, CompanyInfo::class], version = 13,
+    exportSchema = false)
 @TypeConverters(
     RocketTypeConverter::class,
-    LinkLocalTypeConverters::class,
-    SpaceXLaunchesTypeConverters::class)
+    LinkLocalTypeConverters::class)
 abstract class SpaceXRoomDatabase : RoomDatabase() {
-
     abstract fun spaceXDao() : SpaceXDao
     abstract fun companyInfoDao() : ICompanyDao
 

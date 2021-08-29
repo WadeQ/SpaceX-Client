@@ -46,8 +46,9 @@ class LaunchesFragment : Fragment(){
                 setHasFixedSize(true)
             }
 
+            val filterDialogFragment = FilterDialogFragment()
             btnFilterLaunches.setOnClickListener {
-                initFilterDialog()
+                filterDialogFragment.show(parentFragmentManager,"filterDialog")
             }
         }
 
@@ -64,33 +65,16 @@ class LaunchesFragment : Fragment(){
         spaceXLaunchesViewModel.companyInfo.observe(viewLifecycleOwner, Observer {
             if (it != null){
                 binding.apply {
-                    tvCompanyInfo.text = "${it?.name} was founded by ${it?.founder} in ${it?.founded}. " +
-                            "It has now ${it?.employees} employees,${it?.launchSites} launch sites, " +
-                            "and is valued at USD${it?.valuation}"
+                    tvCompanyInfo.text = "${it?.name} was founded by ${it?.founder} in " +
+                            "${it?.founded}. " +
+                            "It has now ${it?.employees} employees,${it?.launchSites} " +
+                            "launch sites, " + "and is valued at USD${it?.valuation}"
                 }
             } else {
                 Timber.d("Error getting data from company API")
             }
         })
         return binding.root
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun initFilterDialog() {
-        val filterDialog : androidx.appcompat.app.AlertDialog? = MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.FilterDialog)
-            .setView(R.layout.filter_dialog)
-            .show()
-        filterDialog?.findViewById<View>(R.id.searchView)?.setOnClickListener {
-
-        }
-        filterDialog?.findViewById<View>(R.id.btn_sort)?.setOnClickListener {
-
-        }
-        filterDialog?.findViewById<View>(R.id.btn_apply)?.setOnClickListener {
-            filterDialog.cancel()
-        }
     }
 
 }
