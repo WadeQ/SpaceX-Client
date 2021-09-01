@@ -19,18 +19,19 @@ class SpaceXLaunchesViewModel
 
     val filter = MutableStateFlow("")
     val sortOrder = MutableStateFlow(SortOrder.FROM_DESC_TO_ASC)
+    val launchSuccess = MutableStateFlow(true)
 
     private val getAllLaunchesByFilterAndSortOrder = combine(
         filter,
-        sortOrder
-    ){ search, sort ->
-        Pair(search,sort)
-    }.flatMapLatest { (search,sort) ->
-        spaceXLaunchesRepository.allLaunches(search,sort)
+        sortOrder,
+        launchSuccess
+    ){ search, sort, success ->
+        Triple(search,sort,success)
+    }.flatMapLatest { (search,sort,success) ->
+        spaceXLaunchesRepository.allLaunches(search= search,sort = sort,success = success)
     }
 
     val fetchAllLaunches = getAllLaunchesByFilterAndSortOrder.asLiveData()
-
     val companyInfo = spaceXLaunchesRepository.companyInfo().asLiveData()
 
     init {
@@ -45,4 +46,5 @@ class SpaceXLaunchesViewModel
     private fun getAllCompanyInfo() = viewModelScope.launch {
         spaceXLaunchesRepository.getCompanyInfoFromRemote()
     }
+
 }

@@ -12,7 +12,7 @@ interface ISpaceRepository {
 
     suspend fun getCompanyInfoFromRemote()
 
-    fun allLaunches(search:String, sort:SortOrder) : Flow<MutableList<SpaceXLocalItem>>
+    fun allLaunches(search:String, sort:SortOrder, success: Boolean) : Flow<MutableList<SpaceXLocalItem>>
 
     fun companyInfo() : Flow<CompanyInfo>
 }

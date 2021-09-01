@@ -9,7 +9,7 @@ import com.wadektech.spacexclient.data.local.typeconverters.LinkLocalTypeConvert
 import com.wadektech.spacexclient.data.local.typeconverters.RocketTypeConverter
 
 
-@Database(entities = [SpaceXLocalItem::class, CompanyInfo::class], version = 13,
+@Database(entities = [SpaceXLocalItem::class, CompanyInfo::class], version = 14,
     exportSchema = false)
 @TypeConverters(
     RocketTypeConverter::class,

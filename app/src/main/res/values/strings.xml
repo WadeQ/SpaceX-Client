@@ -10,4 +10,6 @@
     <string name="launch_success">Launch success</string>
     <string name="hide">Hide</string>
     <string name="sort_by">Sort By:</string>
+    <string name="sort_by_ascending">ASCENDING</string>
+    <string name="sort_by_descending">DESCENDING</string>
 </resources>

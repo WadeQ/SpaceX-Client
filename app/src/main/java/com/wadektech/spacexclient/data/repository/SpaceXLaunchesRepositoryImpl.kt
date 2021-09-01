@@ -55,8 +55,8 @@ class SpaceXLaunchesRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun allLaunches(search : String, sort: SortOrder):
-            Flow<MutableList<SpaceXLocalItem>> = spaceXDao.getAllSpaceLaunches(search,sort)
+    override fun allLaunches(search : String, sort: SortOrder, success:Boolean):
+            Flow<MutableList<SpaceXLocalItem>> = spaceXDao.getAllSpaceLaunches(search,sort,success)
 
 
     override fun companyInfo() : Flow<CompanyInfo> = companyInfoDao.getCompanyInfo()

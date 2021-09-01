@@ -15,15 +15,15 @@ interface SpaceXDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAllSpaceXLaunches(launches: List<SpaceXLocalItem>)
 
-    fun getAllSpaceLaunches(search: String?, sort: SortOrder) :
+    fun getAllSpaceLaunches(search: String?, sort: SortOrder, success: Boolean) :
             Flow<MutableList<SpaceXLocalItem>> = when(sort){
-        SortOrder.FROM_ASC_TO_DESC -> getAllLaunchesSortedByLaunchSuccess(search)
-        SortOrder.FROM_DESC_TO_ASC -> getAllLaunchesSortedByDesc(search)
+        SortOrder.FROM_ASC_TO_DESC -> getAllLaunchesSortedByLaunchSuccess(search,success)
+        SortOrder.FROM_DESC_TO_ASC -> getAllLaunchesSortedByDesc(search,success)
     }
 
-    @Query("SELECT * FROM space_launches WHERE launchYear LIKE '%' || :search || '%' ORDER BY launchSuccess ASC")
-    fun getAllLaunchesSortedByLaunchSuccess(search: String?) : Flow<MutableList<SpaceXLocalItem>>
+    @Query("SELECT * FROM space_launches WHERE launchSuccess = :success AND launchYear LIKE '%' || :search || '%' OR launchSuccess LIKE '%' || :search || '%' ORDER BY launchYear ASC")
+    fun getAllLaunchesSortedByLaunchSuccess(search: String?, success: Boolean) : Flow<MutableList<SpaceXLocalItem>>
 
-    @Query("SELECT * FROM space_launches WHERE launchYear LIKE '%' || :search || '%' ORDER BY launchSuccess DESC")
-    fun getAllLaunchesSortedByDesc(search: String?) : Flow<MutableList<SpaceXLocalItem>>
+    @Query("SELECT * FROM space_launches WHERE  launchSuccess = :success AND launchYear LIKE '%' || :search || '%' OR launchSuccess LIKE '%' || :search || '%' ORDER BY launchYear DESC")
+    fun getAllLaunchesSortedByDesc(search: String?, success: Boolean) : Flow<MutableList<SpaceXLocalItem>>
 }

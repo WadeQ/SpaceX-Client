@@ -1,5 +1,6 @@
 package com.wadektech.spacexclient.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,9 +13,7 @@ import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
 import com.wadektech.spacexclient.databinding.LaunchesListItemsBinding
 
 
-class SpaceXAdapter(var context: Context
-//                    private var singleLaunchItemClicked: OnSingleLaunchItemClicked
-                    ) :
+class SpaceXAdapter(var context: Context) :
         ListAdapter<SpaceXLocalItem, SpaceXAdapter.ViewHolder>(LaunchesDiffUtil()) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,10 +23,7 @@ class SpaceXAdapter(var context: Context
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val launches = getItem(position)
             if (launches != null){
-                holder.bind(
-                    launches
-//                    singleLaunchItemClicked
-                )
+                holder.bind(launches)
             }
 
             when(launches.launchSuccess){
@@ -43,9 +39,8 @@ class SpaceXAdapter(var context: Context
         class ViewHolder private constructor(val binding: LaunchesListItemsBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(launches: SpaceXLocalItem
-//                     singleLaunchItemClicked: OnSingleLaunchItemClicked
-            ){
+            @SuppressLint("SetTextI18n")
+            fun bind(launches: SpaceXLocalItem){
                 binding.apply {
                     tvMissionName.text = launches.missionName
                     tvLaunchDate.text = launches.launchDateLocal
@@ -53,9 +48,7 @@ class SpaceXAdapter(var context: Context
                         .rocket?.rocketName + "/"+ launches.rocket?.rocketType
                     tvDaysSince.text = launches.launchYear
                 }
-                itemView.setOnClickListener {
-//                    singleLaunchItemClicked.onSingleEntryItemClicked(adapterPosition)
-                }
+
             }
 
             companion object {
@@ -67,10 +60,6 @@ class SpaceXAdapter(var context: Context
                 }
             }
         }
-
-    interface OnSingleLaunchItemClicked {
-        fun onSingleEntryItemClicked(position: Int)
-    }
 
         class LaunchesDiffUtil : DiffUtil.ItemCallback<SpaceXLocalItem>(){
             override fun areItemsTheSame(oldItem: SpaceXLocalItem, newItem: SpaceXLocalItem): Boolean {

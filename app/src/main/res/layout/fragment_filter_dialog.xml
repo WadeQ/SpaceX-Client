@@ -14,12 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/sort_by"
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:layout_marginTop="32dp"
         android:padding="8dp"
+        android:text="@string/sort_by"
         android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,12 +27,12 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:padding="8dp"
         android:text="@string/hide"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="18sp"
-        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,37 +43,59 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        android:text="@string/launch_success"
+        android:text="Order"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_asc_to_desc"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/filter_btn_bg"
-        android:text="@string/ascending"
-        app:layout_constraintEnd_toStartOf="@+id/btn_desc_to_asc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_desc_to_asc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/filter_btn_bg"
-        android:text="@string/descending"
+        app:chipSpacingHorizontal="10dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_asc_to_desc"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_ascending"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:checkable="true"
+            android:fontFamily="@font/proximanovaregular"
+            android:text="@string/sort_by_ascending"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@android:color/holo_blue_light"
+            app:chipCornerRadius="5dp"
+            app:chipIcon="@drawable/ic_sort"
+            app:chipIconVisible="false"
+            app:rippleColor="@android:color/holo_blue_bright" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_descending"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:checkable="true"
+            android:fontFamily="@font/proximanovaregular"
+            android:text="@string/sort_by_descending"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@android:color/holo_blue_light"
+            app:chipCornerRadius="5dp"
+            app:chipIcon="@drawable/ic_sort"
+            app:chipIconVisible="false"
+            app:rippleColor="@android:color/holo_blue_bright" />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <TextView
         android:id="@+id/textView11"
@@ -87,7 +109,8 @@
         android:textStyle="bold"
         android:padding="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_asc_to_desc" />
+        app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+
 
     <TextView
         android:id="@+id/textView12"
@@ -95,13 +118,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/launch_year"
-        android:textSize="18sp"
         android:padding="8dp"
+        android:text="@string/launch_year"
         android:textColor="@android:color/holo_blue_bright"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
+        app:layout_constraintTop_toBottomOf="@+id/chip_group_success" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/searchView"
@@ -127,15 +149,74 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="333dp"
-       android:background="@drawable/btn_bg"
+        android:background="@drawable/btn_bg"
         android:padding="8dp"
         android:text="Apply"
-        android:textColor="@color/white"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="@string/launch_success"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_success"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:chipSpacingHorizontal="10dp"
+        app:singleSelection="true"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_success"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:checkable="true"
+            android:fontFamily="@font/proximanovaregular"
+            android:text="LAUNCH SUCCESS"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@android:color/holo_blue_light"
+            app:chipCornerRadius="5dp"
+            app:chipIcon="@drawable/ic_sort"
+            app:chipIconVisible="false"
+            app:rippleColor="@android:color/holo_blue_bright" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_launch_fail"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:checkable="true"
+            android:fontFamily="@font/proximanovaregular"
+            android:text="LAUNCH FAIL"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@android:color/holo_blue_light"
+            app:chipCornerRadius="5dp"
+            app:chipIcon="@drawable/ic_sort"
+            app:chipIconVisible="false"
+            app:rippleColor="@android:color/holo_blue_bright" />
+    </com.google.android.material.chip.ChipGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
