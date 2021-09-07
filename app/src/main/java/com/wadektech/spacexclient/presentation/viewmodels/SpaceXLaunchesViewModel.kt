@@ -4,11 +4,11 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
 import com.wadektech.spacexclient.data.repository.SpaceXLaunchesRepositoryImpl
+import com.wadektech.spacexclient.utils.DataState
 import com.wadektech.spacexclient.utils.SortOrder
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 
@@ -17,26 +17,15 @@ class SpaceXLaunchesViewModel
     private val spaceXLaunchesRepository: SpaceXLaunchesRepositoryImpl
 ) : ViewModel(){
 
-    val filter = MutableStateFlow("")
-    val sortOrder = MutableStateFlow(SortOrder.FROM_DESC_TO_ASC)
-    val launchSuccess = MutableStateFlow(true)
+    private val _launches  = MutableStateFlow(DataState.Success(emptyList()))
+    val launches = _launches.asStateFlow()
 
-    private val getAllLaunchesByFilterAndSortOrder = combine(
-        filter,
-        sortOrder,
-        launchSuccess
-    ){ search, sort, success ->
-        Triple(search,sort,success)
-    }.flatMapLatest { (search,sort,success) ->
-        spaceXLaunchesRepository.allLaunches(search= search,sort = sort,success = success)
-    }
-
-    val fetchAllLaunches = getAllLaunchesByFilterAndSortOrder.asLiveData()
     val companyInfo = spaceXLaunchesRepository.companyInfo().asLiveData()
 
     init {
         getAllSpaceXLaunches()
         getAllCompanyInfo()
+        getAllLaunches()
     }
 
     private fun getAllSpaceXLaunches() = viewModelScope.launch {
@@ -46,5 +35,26 @@ class SpaceXLaunchesViewModel
     private fun getAllCompanyInfo() = viewModelScope.launch {
         spaceXLaunchesRepository.getCompanyInfoFromRemote()
     }
+
+    private fun getAllLaunches() = viewModelScope.launch {
+       spaceXLaunchesRepository.allLaunches(
+           "",
+            SortOrder.FROM_DESC_TO_ASC,
+           true
+       ).collect {
+           _launches.value = DataState.Success(it)
+       }
+    }
+
+    fun getAllFilteredLaunches(search: String, sortOrder: SortOrder, launchSuccess : Boolean) =
+        viewModelScope.launch {
+            spaceXLaunchesRepository.allLaunches(
+                search,
+                sortOrder,
+                launchSuccess
+            ).collect {
+                _launches.value = DataState.Success(it)
+            }
+        }
 
 }

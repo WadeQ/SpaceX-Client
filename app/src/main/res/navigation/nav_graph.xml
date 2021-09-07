@@ -31,14 +31,12 @@
             android:defaultValue="@null" />
         <argument
             android:name="success"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="boolean"
+            android:defaultValue="true" />
         <argument
             android:name="fail"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 
     <fragment

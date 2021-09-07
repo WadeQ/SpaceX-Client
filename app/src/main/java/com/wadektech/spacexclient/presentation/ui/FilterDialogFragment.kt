@@ -10,14 +10,15 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.wadektech.spacexclient.R
 import com.wadektech.spacexclient.databinding.FragmentFilterDialogBinding
+import kotlin.properties.Delegates
 
 
 class FilterDialogFragment : Fragment() {
     private lateinit var binding : FragmentFilterDialogBinding
     private lateinit var ascending : String
     private lateinit var descending : String
-    private lateinit var launchSuccess : String
-    private lateinit var launchFail : String
+    private var launchSuccess : Boolean? = null
+    private var launchFail : Boolean? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +46,12 @@ class FilterDialogFragment : Fragment() {
         action.search = search
         action.ascending = ascending
         action.descending = descending
-        action.success = launchSuccess
-        action.fail = launchFail
+        launchSuccess?.let {
+            action.success = it
+        }
+       launchFail?.let {
+           action.fail = it
+       }
         findNavController().navigate(action)
     }
 
@@ -56,14 +61,14 @@ class FilterDialogFragment : Fragment() {
                 if (chipGroup.findViewById<Chip>(id) != null) {
                     when(chipGroup.findViewById<Chip>(id).text){
                         "LAUNCH SUCCESS" -> {
-                            launchSuccess = "success"
+                            launchSuccess = true
                             Toast.makeText(
                                 requireContext(),
                                 "Selected chip is LAUNCH SUCCESS",
                                 Toast.LENGTH_SHORT).show()
                         }
                         "LAUNCH FAIL" -> {
-                            launchFail = "fail"
+                            launchFail = false
                             Toast.makeText(
                                 requireContext(),
                                 "Selected chip is LAUNCH FAIL",
@@ -109,8 +114,8 @@ class FilterDialogFragment : Fragment() {
     private fun initVariables(){
         ascending = ""
         descending = ""
-        launchSuccess = ""
-        launchFail = ""
+        launchSuccess = null
+        launchFail = null
     }
 }
 
