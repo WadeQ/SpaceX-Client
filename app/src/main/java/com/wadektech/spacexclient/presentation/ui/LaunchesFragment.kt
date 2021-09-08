@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -35,7 +36,7 @@ class LaunchesFragment : Fragment(){
     private lateinit var sort : SortOrder
     private lateinit var searchQuery : String
     private var launchSuccess : Boolean? = null
-    private val spaceXLaunchesViewModel : SpaceXLaunchesViewModel by viewModels()
+    private val spaceXLaunchesViewModel : SpaceXLaunchesViewModel by activityViewModels()
     private val args: LaunchesFragmentArgs by navArgs()
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -43,10 +44,8 @@ class LaunchesFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentLaunchesBinding.inflate(inflater)
-        binding.lifecycleOwner = this
 
+        initUI(inflater)
         initVariables()
         initProgressBar()
         initNavigation()
@@ -58,6 +57,11 @@ class LaunchesFragment : Fragment(){
         return binding.root
     }
 
+    private fun initUI(inflater: LayoutInflater) {
+        binding = FragmentLaunchesBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+    }
+
     private fun initVariables() {
         spaceXAdapter = SpaceXAdapter(requireContext())
         sort = SortOrder.FROM_DESC_TO_ASC
@@ -67,7 +71,6 @@ class LaunchesFragment : Fragment(){
 
     private fun getSearchRequest(){
         val search = args.search
-        if (search != null) searchQuery = search
         val ascending = args.ascending
         val descending = args.descending
         val fail = args.fail
@@ -98,11 +101,13 @@ class LaunchesFragment : Fragment(){
         }
 
         lifecycleScope.launchWhenStarted {
-            spaceXLaunchesViewModel.getAllFilteredLaunches(
-                searchQuery,
-                sort,
-                launchSuccess!!
-            )
+            if (search != null) {
+                spaceXLaunchesViewModel.getAllFilteredLaunches(
+                    search,
+                    sort,
+                    launchSuccess!!
+                )
+            }
         }
     }
 

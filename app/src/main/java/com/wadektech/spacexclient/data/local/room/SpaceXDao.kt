@@ -21,9 +21,9 @@ interface SpaceXDao {
         SortOrder.FROM_DESC_TO_ASC -> getAllLaunchesSortedByDesc(search,success)
     }
 
-    @Query("SELECT * FROM space_launches WHERE launchSuccess = :success AND launchYear LIKE '%' || :search || '%' OR launchSuccess LIKE '%' || :search || '%' ORDER BY launchYear ASC")
+    @Query("SELECT * FROM space_launches WHERE launchSuccess = :success AND launchYear LIKE '%' || :search || '%' ORDER BY launchYear ASC")
     fun getAllLaunchesSortedByLaunchSuccess(search: String?, success: Boolean) : Flow<MutableList<SpaceXLocalItem>>
 
-    @Query("SELECT * FROM space_launches WHERE  launchSuccess = :success AND launchYear LIKE '%' || :search || '%' OR launchSuccess LIKE '%' || :search || '%' ORDER BY launchYear DESC")
+    @Query("SELECT * FROM space_launches WHERE  launchSuccess = :success AND launchYear LIKE '%' || :search || '%' ORDER BY launchYear DESC")
     fun getAllLaunchesSortedByDesc(search: String?, success: Boolean) : Flow<MutableList<SpaceXLocalItem>>
 }
