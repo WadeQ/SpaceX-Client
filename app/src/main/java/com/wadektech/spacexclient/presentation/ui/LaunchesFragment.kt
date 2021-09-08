@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.wadektech.spacexclient.R
 import com.wadektech.spacexclient.data.local.models.SpaceXLocalItem
 import com.wadektech.spacexclient.databinding.FragmentLaunchesBinding
@@ -116,10 +117,26 @@ class LaunchesFragment : Fragment(){
             spaceXLaunchesViewModel.launches.collect {
                 binding.progressBar.showProgressBar(false)
                 when(it){
+                    is DataState.Loading -> showProgressBar()
                     is DataState.Success -> updateUI(it.launches)
+                    is DataState.Error -> showError(it.exception.message)
                 }
             }
         }
+    }
+
+    private fun showError(message: String?) {
+        if (message != null) {
+            Snackbar.make(
+                binding.root,
+                message,
+                Snackbar.LENGTH_LONG
+            )
+        }
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.showProgressBar(true)
     }
 
     private fun updateUI(list: List<SpaceXLocalItem>) {
@@ -153,7 +170,7 @@ class LaunchesFragment : Fragment(){
     }
 
     private fun initProgressBar(){
-        binding.progressBar.showProgressBar(true)
+        binding.progressBar.showProgressBar(false)
     }
 
     private fun initNavigation(){

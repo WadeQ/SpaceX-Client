@@ -17,7 +17,7 @@ class SpaceXLaunchesViewModel
     private val spaceXLaunchesRepository: SpaceXLaunchesRepositoryImpl
 ) : ViewModel(){
 
-    private val _launches  = MutableStateFlow(DataState.Success(emptyList()))
+    private val _launches : MutableStateFlow<DataState> = MutableStateFlow(DataState.Success(emptyList()))
     val launches = _launches.asStateFlow()
 
     val companyInfo = spaceXLaunchesRepository.companyInfo().asLiveData()
