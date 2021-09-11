@@ -64,6 +64,4 @@ The UI test run normally, either on a device or an emulator, without any special
 
 I added some screenshots as shown:
 
-Main Screen | Filter Dialog 
---- | --- | ---
 <img src="https://i.imgur.com/3qdxfqK.jpg" width="280"/> | <img src="https://i.imgur.com/gRD1rWD.jpg" width="280"/> 
