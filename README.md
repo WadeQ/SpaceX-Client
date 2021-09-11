@@ -14,8 +14,6 @@ while the "All launches" endpoint returns the data for the rest of the list.
 
 ![](https://i.imgur.com/CDnvqiI.png)
  
- 
- ```
 - Use any libraries for Android that you want, but we will need to be able to build your code to evaluate it.
 
 ### Prerequisites - Unit Tests
