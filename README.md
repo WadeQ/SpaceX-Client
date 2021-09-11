@@ -11,9 +11,10 @@ The "Company Info" endpoint returns the data for the section at the top of the s
 while the "All launches" endpoint returns the data for the rest of the list.
   
 - The app should look close/like this:
+
+![](https://i.imgur.com/CDnvqiI.png)
  
- (https://i.imgur.com/CDnvqiI.png)
-}
+ 
  ```
 - Use any libraries for Android that you want, but we will need to be able to build your code to evaluate it.
 
