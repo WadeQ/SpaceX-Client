@@ -34,7 +34,6 @@ The UI test run normally, either on a device or an emulator, without any special
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
     * [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
     * [Retrofit](https://square.github.io/retrofit/)
-    * [Chucker](https://github.com/ChuckerTeam/chucker)
     * [Jetpack](https://developer.android.com/jetpack)
         * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
@@ -50,12 +49,6 @@ The UI test run normally, either on a device or an emulator, without any special
 
 * Gradle
     * [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
-    * Plugins
-        * [Spotless](https://github.com/diffplug/spotless)
-        * [Dokka](https://github.com/Kotlin/dokka)
-        * [jacoco](https://github.com/jacoco/jacoco)
-        * [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle)
-        * [Detekt](https://github.com/detekt/detekt)
 
 * CI/CD
     * Github Actions
