@@ -62,8 +62,8 @@ The UI test run normally, either on a device or an emulator, without any special
 
 ### Screenshots
 
-I added some screenshots in the `screenshots` folder, in the root directory of the project. Added some GIFs to also show end to end test on the app
+I added some screenshots as shown:
 
-Light | Dark | GIF
+Main Screen | Filter Dialog 
 --- | --- | ---
-<img src="https://github.com/jumaallan/apollo-agriculture/blob/master/screenshots/weather_light.png" width="280"/> | <img src="https://github.com/jumaallan/apollo-agriculture/blob/master/screenshots/weather_dark.png" width="280"/> | <img src="https://github.com/jumaallan/apollo-agriculture/blob/master/screenshots/weather.gif" width="280"/>
+<img src="https://i.imgur.com/3qdxfqK.jpg" width="280"/> | <img src="https://i.imgur.com/gRD1rWD.jpg" width="280"/> 
