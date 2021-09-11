@@ -32,7 +32,7 @@ The UI test run normally, either on a device or an emulator, without any special
     * [Kotlin](https://kotlinlang.org/)
     * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
-    * [HILT](https://developer.android.com/training/dependency-injection/hilt-android)
+    * [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
     * [Retrofit](https://square.github.io/retrofit/)
     * [Chucker](https://github.com/ChuckerTeam/chucker)
     * [Jetpack](https://developer.android.com/jetpack)
