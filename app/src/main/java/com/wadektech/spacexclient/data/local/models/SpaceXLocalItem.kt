@@ -1,4 +1,4 @@
-package com.wadektech.spacexclient.data.local.models
+ package com.wadektech.spacexclient.data.local.models
 
 
 import androidx.room.Entity
